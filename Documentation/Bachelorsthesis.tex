@@ -1,0 +1,299 @@
+                 
+\documentclass[english,12pt,oneside,a4paper]{article}
+\usepackage{babel}
+\usepackage{graphicx}
+\title{VoiceRecognition}
+\author{Kalocsanyi Daniel}
+\begin{document}
+	\begin{center}
+		\textbf{Universita J.Selyeho - J.Selye University}
+		\\
+		\textbf{Fakulta Economie and Informatiky - Faculty of Economic and Informatics}
+		\\
+		\includegraphics[scale=1.4]{logo}
+		\hspace{8cm}
+		\textbf{Machine Learning algorithm for recognizing word recordings}
+		\\
+		\textbf{Bakalarska praca - Bachelor's Thesis}
+	\begin{flushleft}
+		\vspace{11cm}
+		\textbf{Kalocsanyi Daniel 2024 Komarno}
+	\end{flushleft}
+	\newpage
+	\textbf{Abstract}
+	\\
+	The project is about creating a machine learning algorithm that can understand words from recording. To do that, we need to build a model that will calculate the accuracy of words from the recording. To build a model and calculate the model we needed to extract data from the voice and store it, after storing all the data we will create the model. In order to make sure the model understanding words we will test it with real life recording. All recordings are from the database Modzilla Common Voice.
+	\textbf{Keywords: Discrete Fourier Transform,Open-source, Machine Learning, Artificial Intelligence, Support Vector Machines(SVM)} 
+	\newpage
+	\textbf{Absztract}
+	\\
+	A projekt célja egy olyan gépi tanulási algoritmus létrehozása, amely képes a szavakat a felvételekből megérteni. Ehhez egy olyan modellt kell építenünk, amely kiszámítja a szavak pontosságát a felvételből. A modell építéséhez és a modell kiszámításához szükségünk volt arra, hogy a hangból adatokat nyerjünk ki és tároljuk, az összes adat tárolása után létrehozzuk a modellt. Annak érdekében, hogy megbizonyosodjunk arról, hogy a modell megérti a szavakat, valós felvételekkel fogjuk tesztelni. Az összes felvétel a Modzilla Common Voice adatbázisából származik.\\
+	\textbf{Kulcsszavak: Diszkrét Fourier-transzformáció,nyílt forráskód,gépi tanulás, mesterséges intelligencia,támogató vektor gépek(SVM)} 
+	\newpage
+	\textbf{Abstract}
+	\\
+	Projekt sa týka vytvorenia algoritmu strojového učenia, ktorý dokáže porozumieť slovám z nahrávky. Na to potrebujeme vytvoriť model, ktorý bude počítať presnosť slov z nahrávky. Na vytvorenie modelu a výpočet modelu sme potrebovali získať údaje z hlasu a uložiť ich, po uložení všetkých údajov vytvoríme model. Aby sme sa uistili, že model rozumie slovám, otestujeme ho s reálnou nahrávkou. Všetky nahrávky sú z databázy Modzilla Common Voice.\\
+	\textbf{Kľúčové slová: Diskrétna Fourierova transformácia,otvorený zdroj, strojové učenie, umelá inteligencia, podporné vektorové stroje(SVM)}
+	\newpage
+	Resume
+	\newpage
+	\newpage
+	\tableofcontents
+	\newpage
+		\section{Introduction}
+		The goal of this project is to build an algorithm that is capable of understanding spoken words from different audio recordings. To build the model we extract the data from the recordings and use the extracted data classify the recordings. In order to evaluate the  accuracy of our model, we classify the recordings and compare the classes with the annotated database.
+		\subsection{What is Machine Learning}
+		Machine learning is a subfield of artificial intelligence, which is broadly defined as the capability of a machine to imitate intelligent human behavior. Artificial intelligence systems are used to perform complex tasks in a way that is similar to how humans solve problems.
+		Machine learning is an application of artificial intelligence that uses statistical techniques to enable computers to learn and make decisions without being explicitly programmed. The learning process is automated and is improving based on the experiences of the machines throughout the process.
+		\subsection{History of Machine Learning}
+		1642 - Blaise Pascal created one of the first mechanical adding machines as an attempt to automate data processing. It employed a mechanism of cogs and wheels, similar to those in odometers and other counting devices.\\
+		1801 - When looking at the history of machine learning, there are lots of surprises. Our first encounter was a data storage device. The device that could be considered a data storage was, in fact, was used in a weaving loom for storing stiching patterns. The first use of data storage was in a loom created by a French inventor named Joseph-Marie Jacquard, that used metal cards with holes to arrange threads. These cards comprised a program to control the loom and allowed a procedure to be repeated with the same outcome every time.\\
+		1847 - Boolean Logic (also known as Boolean Algebra), all values are either True or False. These true and false values are employed to check the conditions that selection and iteration rely on. This is how Boolean operators work. George Boole created AND, OR, and XOR operators using this logic, responding to questions about true or false, yes or no, and binary 1s and 0s. These operators are still used in computational logic today.
+		Boolean algebra is introduced in artificial intelligence to address some of the problems associated with machine learning.\\
+		1890 - Herman Hollerith developed the first combined mechanical calculation and punch-card system to compute statistics from millions of individual samples efficiently. It was an electromechanical machine built to assist in summarizing data stored on punched cards.\\
+		1949 - In 1949, Canadian psychologist Donald O. Hebb, then a lecturer at McGill University, published The Organization of Behavior: A Neuropsychological Theory. Hebb referred to the combination of neurons that may be regarded as a single processing unit as "cell assemblies."
+		Hebb's model for the functioning of the mind has had a significant influence on how psychologists view stimulus processing in mind. It also paved the way for the development of computational machines that replicated natural neurological processes, such as machine learning.\\
+		1950 - In 1950 Alan Turing created the Turing Test to determine if a computer has really intelligent. To pass the test, a computer must be able to fool a human into believing it is also human.
+		\section{Support Vector Machines(SVM)}
+		A support vector machine (SVM) is a supervised machine learning model that uses classification algorithms for binary classification problems. After giving an SVM model sets of labeled training data for each category, the trained machine is able to categorize new samples. Compared to newer algorithms like neural networks, they have two main advantages: higher speed and better performance with a limited number of samples (in the thousands).
+		The goal is to find the hyperplane in a N-dimensional space (where N is the number of features). To separate the data points, we need to choose the best hyperplanes which maximize the distance between data points of both classes. (Distance between points - Maximum margin). The data points are falling on both sides of the hyperplanes, and the dimension of hyperplanes depends upon the number of features. However, the number of input features is only 2 then the hyperplane is just a line. When we going up with the number of input features the hyperplane becomes higher-dimensional.
+		\subsection{SVM overview}
+		The support vectors are data points that are closer to the hyperplanes and manipulate the orientation of the hyperplanes. Using support vectors we set the maximum margin of the classifier.
+		SVM can be used both on regression and classification, but mainly used in classification objectives.
+		\subsection{SVM implementations}
+		In SVM algorithm we are looking to maximaze the margin between data points and the hyperplanes. To do that we actually need to calculate the loss function, which will help us to determine the maximum margin.
+		%$$$$$%
+		\section{Sound Processing}
+		Sound is a one dimensional signal which represents the air pressure change in the air. Using a simple algorithm, the single-input and single-output (SISO), we take the input from the signal and produce the output according to the sample. To process any continuous signal by computers, the signals needs to be discretized into to discrete samples. The procedure that transforms the signal from continuous to discrete time is usually called sampling, by picking up the values from the continuous-time signal. The phrase called sampling interval is where the signal has multiple quantities.
+		\subsection{Java Sound Processing}
+		Java has its own API for sound processing, called Java Sound API. The API provides detailed support and documentation for capturing, processing and rendering audio signals. Only uses a really small amount of system resources. It can be used to manipulate resources such as digital audio signals, and devices that require soundcards.
+		\subsection{Examples of sound processing}
+		
+		\section{Sound Format}
+		Sound Format defines the  quantity and loss of audio data.
+		They are divided into 3 parts:Uncompressed Formats,	Lossy Compressed format,Lossless Compressed Format.
+		There are various types of audio formats each one has its advantages and disadvantages in audio data compression. If we select an audio format it is highly recommended to consider some factors such as compatibility, size of the format, and sound quality. These above-mentioned parameters play a big part in finding the best format when it comes to either of these 3 format types. We talk about the uncompressed audio format when the raw data is kept in the audio format, although the disadvantage of that is the data comes with a larger file size. Among the most popular uncompressed formats, we find WAV and AIFF formats. When we talk about compressed audio formats it's quite the opposite of uncompressed formats. Compressed formats solve the issue of large files in exchange processing power needed for uncompressing the signal. It uses a unique algorithm that removes any of the data that is not suitable for the human ear. This action reduces the file size and makes the format more compatible with other formats. There are a lot of compressed formats most popular formats include  MP3, M4A, AAC, and FLAC.
+		\\
+		Uncompressed file formats are :
+		\begin{itemize}
+		\item PCM
+		\item WAV 
+		\item and AIFF
+		\end{itemize}
+		Lossy compressed formats are : 
+		\begin{itemize}
+		\item MP3
+		\item AAC
+		\item WMA
+		\end{itemize}
+		Lossless compressed formats are
+		\begin{itemize}
+		\item FLAC
+		\item ALAC.
+		\end{itemize}
+		
+		\subsection{Sound File Formats}
+		Sound file formats are digital standards for storing audio information. PCM needs to be organized into a file so you can work with it, or play it back in a system. Different audio file formats use differents containers and varying methods of data compression to organize the PCM stream. Depending on which you choose, each format represents the same information in different storage sizes or quality.\\
+		PCM(Pulse Code Modulation) - Represents raw audio signals in digital forms. To convert analog signal into digital it has to be at different interval. It has sampling rate and bitrate, the number of bits used to represent each sample in the audio.\\
+		WAV(WaveForm Audio File Format) - It was developed by Microsoft and IBM. It is a windows audio format. it is just a wrapper most cases these WAV files contain uncompressed audio in PCM format.\\
+		AIFF(Audio Interchange File Format) - Developed by Apple for mac.
+		They can obtain multiple kinds of audio format. This format is also a wrapper for PCM encoding. Containing uncompressed audio in PCM format. It's compatible both for Windows and Mac operation systems.
+		
+		\section{Discrete Fourier Transform}
+		The Discrete Fourier Tranform(DFT) is considered one of the most used algorithm of all the time. It's used in digital communication, image compression, signal processing etc. Fourier transform on such discrete signals can be done using DFT, which can be used to switch back and forth between the time and frequency domains. The time signal need to be finite to be proccessed, because the digital computer doesn't work with continous-time signals.
+		\subsection{Discrete Fourier Transform Theory And Implementation}
+		Discrete Fourier Transform is method, which enable to find the spectrum of finite-duration signal. There are some circumstances, which need to be fulfilled in order to decide the frequency of the time-domain signal.
+		\section{Learning Database, History, Size types of words, Methods of Collection}
+		\subsection{What is Database}
+		A database is a repository of data, it's designed to store data conveniently. Various kind of databases exists to satisfy different kind of industry expectations. In the database, you may store binary files, documents, relational data, and so on. Data can be stored in many forms namely tabular, hierarchical, and graphical forms. When data is stored in a tabular form called a relational database. However, when the data is stored in a tree form called a hierarchical database.
+		\subsection{History of Databases}
+		In the 1960s, network and hierarchical systems such as CODASYL and IMSTM were the
+		state-of-the-art technology for automated banking, accounting, and order processing
+		systems enabled by the introduction of commercial mainframe computers. While these
+		systems provided a good basis for the early systems, their basic architecture mixed the
+		physical manipulation of data with its logical manipulation. When the physical location of data changed, such as from one area of a disk to another, applications had to be updated to reference the new location.
+		\subsection{Sizes and Types of Words}
+		
+		\subsection{Methods of Collection}
+		
+		\section{Mozilla Spoken Words Project}
+		Mozilla Common Voice is a free database designed to help to build a voice database for speech recognition. The project is supported by volunteers worldwide. They record their voices and sentences, also they review other peoples recordings. These recorded sentences are collected in the voice database, which is publicly accessible.
+		\subsection{Modzilla Common Voice Database Recordings}
+		
+		\section{Number of Samples, and the Types of Recorded Words}
+		The Common Voice dataset contains more than 1400 hours of recorded words. It's a diverse way to represent data samples and has a unique approach to record words wordwide from different users. It's quite remarkable that the words can reach more than 1500 samples per recording. 
+		\section{SWIG}
+		SWIG is a software development tool that simplifies the task of interfacing different languages to C and C++ programs. In a nutshell, SWIG is a compiler that takes C/C++ declarations and creates the wrappers needed to access for those declaration from other languages including Perl, Python, Tcl, Ruby, and Java. SWIG was originally designed to make it extremely easy for engineers to build extensible software without having to write complicated code.
+		\subsection{Why Use SWIG}
+		Using SWIG, you can replace the main function of a C program with a scripting interpreter from which you can control the application. SWIG allows C and C++ programs to be placed in a scripting environment that can be used for testing and debugging.
+		\subsection{Examples of Using SWIG}
+		
+		\section{Java and its Modules}
+		\subsection{Java Platform Module System (JPMS)}
+		Java Platform Module System (JPMS) - It's a new feature implemented in Java to sort and manage modules.
+		\subsection{Important Modules in Java}
+		Java Application Interfaces(APIs) are sorted into methods, classes, and packages. The highest package level is called the modules, and it's an essential part of many Java programs. A module has many parameters, like name, dependency, API, and services. The API comes with these built-in components and modules. 		
+		\section{Java Machine Learning Libraries}
+		
+		\subsection{Weka,Deeplearning4j,JavaML,OpenNLP}
+		
+		\section{DLib Library For Machine Learning}
+		Dlib ML is a cross platform open source machine learning library. It was written completelly in C++ programming language.
+		\subsection{Dlib Implementation}
+		The library is consist of a four various components : Bayesian Nets, Linear Algebra, and Optimization. From these components: Linear Algebra is the one who provide the core of the DLib library. To use it properly all 4 components have to be implemented.
+		\section{Searching for machine learning libraries}
+	
+		\subsection{Finding the library for machine learning}
+		First we needed to find the best library for us to create the model.
+		We started by looking in the web for a unique library that will do this task for us. We have found lot of different libraries compatible with Java, but not all libraries were right for the task. To make sure, we use the right library, we did some research about Weka ML and Dlib ML.
+		Finally we have concluded that for us the best pick is Dlib ML. It has support lot of languages and with a right wrapper we can implement that to make the algorithm.
+		\subsection{Choosing the right library for machine learning}
+		To choose the best machine learning library for this task was quite diffucult, because we had so many options sin Java. We started with Weka which is a machine learning library for Java, but later we realized that just doesn't fit there.
+		\section{Creating the SWIG module}
+		
+		\section{Training the sound models}
+		
+		\section{Extracting feature vectors}
+		To extract feature vectors we stored a voice in an array.
+		\section{Dimenson reduction(PCA)}
+		
+		\section{Optimizing training parameters}
+		
+		\section{Software modules}
+		
+		\section{Description of the functions}
+		
+		\section{Training set}
+		
+		\section{Optimizing training parameters}
+		
+		\section{Training}
+		
+		\section{Testing Results}
+		
+		\section{ROC accuracy}
+		
+		\section{Parameters tuning}
+		
+		\section{Summary}
+		
+\newpage
+	\begin{itemize}
+		\item History of machine learing (0.5pages)
+		\item Support Vector Machines (1-2pages)
+		\item Sound Processing (1-2pages)
+		\item Sound Format (1 page)
+		\item Sound File Formats (1 page)
+		\item Discrete Fourier Transform (0.5-1page)
+		\item Learning Database, history, size types of words, methods of collection (1 page)
+		\item Mozilla spoken words project (0.5 page)
+		\item Number of samples, and the types of recorded words
+		\item java and its modules (0.5 page)
+		\item SWIG (1 page)
+		\item DLib library for machine learning (1page)
+		%\item Machine learning libraries to construct the model		
+	\end{itemize}
+	Practical chapter
+	\begin{itemize}
+		\item searching for machine learning libraries (0.5 page)
+		\item creating the SWIG module (1-2 page)
+		\item Training the sound models (2-3 page)
+		\item extracting feature vectors (0.5 page)
+		\item dimenson reduction (PCA) (0.5 page)
+		\item optimizing training parameters ($\mu$ and $\gamma$) (1-2page)
+		\item software modules (1 page)
+		\item description of the functions (1 page)
+		\item training set (0.5 page)
+		\item optimizing training parameters (1 page)
+		\item Training (1 page)
+		\item testing results (1 page)
+		\item ROC, accuracy (1 page)
+		\item parameter tuning (0.5 page)
+	\end{itemize}
+	
+	\begin{thebibliography}{15}
+		\bibitem{1}
+		Available online: https://www.lightsondata.com/the-history-of-machine-learning/
+		\bibitem{2}
+		Available online: https:https://dataconomy.com/2022/04/27/the-history-of-machine-learning/
+		\bibitem{3}
+		Available online: https://mitsloan.mit.edu/ideas-made-to-matter/machine-learning-explained
+		\bibitem{4}
+		Available online: https://www.mygreatlearning.com/blog/what-is-machine-learning/
+		\bibitem{5}
+		Ingo Steinwart Support Vector Machines [book] 2008, ISBN: 978-0-387-77241-7
+		Available from: 
+		\bibitem{6}
+		Available online:https://monkeylearn.com/blog/introduction-to-support-vector-machines-svm/
+		\bibitem{7}
+		Available online: https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47
+		\bibitem{8}
+		Available online:
+		https://www.masteringthemix.com/blogs/learn/audio-file-formats-explained
+		\bibitem{9}
+		Available online: 
+		https://immersiveaudioalbum.com/an-introduction-to-audio-file-formats/
+		\bibitem{10}
+		Available online:
+		https://www.geeksforgeeks.org/audio-format/
+		\bibitem{11}
+		Available online:
+		%https://web.mit.edu/~gari/teaching/6.555/lectures/ch_DFT.pdf
+		\bibitem{12}
+		Available online:
+		https://towardsdatascience.com/learn-discrete-fourier-transform-dft-9f7a2df4bfe9
+		\bibitem{13}
+		Available online:
+		https://medium.com/@kamil2000budaqov/discrete-fourier-transform-75d9a9f37821
+		\bibitem{14}
+		https://uconntact.uconn.edu/event/6149354
+		\bibitem{15}
+		https://www.mrowe.co.za/blog/2018/10/mozillas-common-voice-project/
+		\bibitem{16}
+		https://riptutorial.com/swig
+		\bibitem{17}
+		https://www.swig.org/Doc3.0/Introduction.html
+		\bibitem{18}
+		https://blog.landr.com/audio-file-formats/
+		\bibitem{19}
+		https://emastered.com/blog/audio-file-formats
+		\bibitem{20}
+		Davide Rocchesso Introduction to Sound Processing [book] 2003\\ ISBN: 88-901126-1-1
+		\bibitem{21}
+		Extracting feature vectors
+		\bibitem{22}
+		Available online: https://indietips.com/audio-format-guide/
+		%https://chsasank.com/swig_www/exec.html
+		 %https://www.cmm.gov.mo/eng/exhibition/secondfloor/moreinfo/2_7_3_SoundProcessing.html
+		 \bibitem{23}
+		 Available online:
+		 https://jmlr.csail.mit.edu/papers/volume10/king09a/king09a.pdf
+		 Voice recognition algorithm
+		 \bibitem{24}
+		 Available online : https://medium.com/@kamil2000budaqov/discrete-fourier-transform-75d9a9f37821
+		 \bibitem{25}
+		Introduction to sound processing book
+		\bibitem{26}
+		Available online: https://www.developer.com/guides/introduction-to-the-java-sound-api/
+		\bibitem{27}
+		Available online:
+		https://jenkov.com/tutorials/java/modules.html
+		\bibitem{28}
+		Available online:
+		https://howtodoinjava.com/java9/java-9-modules-tutorial/
+		\bibitem{29}
+		Available online:
+		https://dev.java/learn/modules/intro/
+		\bibitem{30}
+		Available online:
+		https://www.geeksforgeeks.org/jpms-java-platform-module-system/
+		\bibitem{31}
+		Available online:
+		https://blog.mozilla.org/en/mozilla/news/sharing-our-common-voices-mozilla-releases-the-largest-to-date-public-domain-transcribed-voice-dataset/
+		\bibitem{32}
+		Available online:
+		
+	\end{thebibliography}
+\end{center}
+\end{document}
+% 12 page
